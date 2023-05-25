@@ -4,8 +4,12 @@
   "description": "First ever node project",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "npx nodemon"
   },
   "author": "Jacob Solomon",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
 }
