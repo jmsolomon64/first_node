@@ -1,6 +1,22 @@
-const express = require('express');
+//npm install nodemon -> auto refresh on saves
+const express = require('express'); //npm install express -> used to create endpoints and listen 
+const mongoose = require('mongoose'); //npm install mongoose -> used to connect and work with db
 const app = express();
-const PORT = 3000;
+
+if(process.env.NODE_ENV !== 'production') { //Configures .env file if NODE_ENV = production was not set before start
+    require('dotenv').config(); //npm install dotenv
+}
+
+const PORT = process.env.PORT || 3000; //checks for environment variable, if none then 3000
+const CONNECTION = process.env.CONNECTION;
+
+const start = async() => {
+    await mongoose.connect(CONNECTION);
+
+    app.listen(PORT, () => {
+        console.log('Listening on port:' + PORT);
+    })
+}
 
 const cats = [
     {
@@ -38,6 +54,8 @@ app.post('/', (req, res) => {
     res.send({"data": cats[req.id]});
 });
 
-app.listen(PORT, () => {
-    console.log('Listening on port:' + PORT);
-})
+try {
+    start();
+} catch(e) {
+    console.log(e.message);
+}
