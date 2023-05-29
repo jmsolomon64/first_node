@@ -1,15 +1,22 @@
-const mongoose = require('mongoose'); //needed for mongo DB functionality 
-
-const catSchema = new mongoose.Schema({ //decleration of new schema 
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Cat = void 0;
+const mongoose_1 = require("mongoose"); //needed for mongo DB functionality 
+const catSchema = new mongoose_1.Schema({
     name: {
-        type: String, //data type for field
+        type: String,
         required: true //forces name to be required
     },
     furPattern: {
         type: String,
         required: true
     },
-    favoriteColor: String //if not required, just need data type
+    favoriteColor: String,
+    hobbies: [
+        {
+            name: String,
+            description: String
+        }
+    ]
 });
-
-module.exports = mongoose.model('Cat', catSchema); //exports this model with mongo DB functionality to the rest of project
+exports.Cat = (0, mongoose_1.model)('Cat', catSchema); //exports this model with mongo DB functionality to the rest of project
